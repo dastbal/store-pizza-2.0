@@ -33,6 +33,7 @@ export class AuthService {
     .pipe(
       tap((profile)=> this.profileShared.next(profile as Profile) )
     )
+
   }
   loginAndGetProfile(email:string , password : string){
     return this.login(email,password)

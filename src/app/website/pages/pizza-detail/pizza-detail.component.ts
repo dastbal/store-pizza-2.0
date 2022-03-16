@@ -26,13 +26,15 @@ export class PizzaDetailComponent implements OnInit {
       switchMap((params)=>{
         this.pizzaId = params.get('pizzaId');
         if( this.pizzaId){
+          console.log(this.pizzaId)
           return  this.pizzaService.getPizza(this.pizzaId)
         }
         return [null]
       }
       )
-    )
-    .subscribe((data)=>{
+      )
+      .subscribe((data)=>{
+      console.log(data)
       this.pizza = data;
     })
 

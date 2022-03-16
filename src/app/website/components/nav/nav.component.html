@@ -19,7 +19,11 @@
     <button (click)="toggleMenu()" type="button">Close</button>
     <ul>
       <li><a routerLinkActive="active" routerLink="">Home</a></li>
-      <li><a routerLinkActive="active" href="">Pizza</a></li>
+      <li *ngFor="let category of categories">
+        <a routerLinkActive="active" [routerLink]="['/category', category.id]">
+          {{ category.name }}</a
+        >
+      </li>
     </ul>
   </div>
 </div>
@@ -35,7 +39,14 @@
       </a>
       <ul>
         <li><a routerLinkActive="active" routerLink="">Home</a></li>
-        <li><a routerLinkActive="active" href="">Pizza</a></li>
+        <li *ngFor="let category of categories">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/category', category.id]"
+          >
+            {{ category.name }}</a
+          >
+        </li>
       </ul>
     </nav>
     <div class="info">
@@ -45,7 +56,7 @@
         </button>
         <ng-template #elseBlock>
           <a routerLink="profile">
-            {{ profile?.user?.firstName }} {{ profile?.user?.lastName }}
+            {{ profile?.role }}
           </a>
           <button (click)="logout()">Cerrar Session</button>
         </ng-template>

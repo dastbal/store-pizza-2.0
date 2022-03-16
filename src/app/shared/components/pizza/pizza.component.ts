@@ -11,11 +11,14 @@ export class PizzaComponent implements OnInit {
 
   @Input()
   pizza : Pizza ={
-    _id:'djdj5',
+    id:'djdj5',
     name: 'Pizza',
     description : 'Delicous',
     image : 'https://picsum.photos/200',
     price : 10,
+    categoryId: 1,
+    ingredientsId :[1,2]
+
   };
 
   @Output()
@@ -35,7 +38,7 @@ export class PizzaComponent implements OnInit {
 
   }
   showDetail(){
-    this.pizzaDetail.emit(this.pizza._id);
+    this.pizzaDetail.emit(this.pizza.id);
 
   }
 

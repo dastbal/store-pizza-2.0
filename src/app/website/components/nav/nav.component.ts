@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
+import { Category } from 'src/app/models/category.models';
 import { Profile } from 'src/app/models/profile.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { CategoriesService } from 'src/app/services/categories.service';
 import { StoreService } from 'src/app/services/store.service';
 import { UsersService } from 'src/app/services/users.service';
 @Component({
@@ -14,22 +16,16 @@ export class NavComponent implements OnInit {
 
   constructor(
     private storeService : StoreService,
-    private userService: UsersService,
     private authService : AuthService,
+    private categoryService : CategoriesService,
     private router : Router) { }
 
   isLogged = false;
   profile : Profile | null =  {
-    "sub": "622056db20d846082881e86h",
-    "role": "admin",
-    "user": {
-      "_id": "622056db20d846082881e86h",
-      "role": "admin",
-      "email": "steben@gmail.com",
-      "lastName": "sun",
-      "firstName": "dave",
-    },
+    "sub": 1,
+    "role": "admin"
   };
+   categories : Category[] = [{'id':1,'name':'pizza'}]
 
   activeMenu =false;
   counter = 0 ;
@@ -44,14 +40,18 @@ export class NavComponent implements OnInit {
       this.profile = data;
 
     })
+
+    this.categoryService.getAllCategories()
+    .subscribe(data=> this.categories = data)
+
   }
   toggleMenu() {
     this.activeMenu = !this.activeMenu;
   }
   login(){
     this.authService.loginAndGetProfile(
-      "steven@gmail.com",
-      "david95"
+      "davidxsteven@gmail.com",
+      "ss"
     )
     .subscribe(
       ()=>{

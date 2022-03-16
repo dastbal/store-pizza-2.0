@@ -15,7 +15,25 @@ export class PizzasService {
 
   constructor( private http: HttpClient) { }
 
-  getAllPizzas(limit ?: number ,offset ?: number){
+  getbyCategory(categoryId : string , limit ?: number ,offset ?: number  ){
+    let params = new HttpParams();
+    if(limit && offset == 0){
+      params = params.set('limit', limit);
+      params = params.set('offset', offset);
+      params = params.set('category', categoryId);
+    }
+    return this.http.get<Pizza[]>(this.apiUrl , { params}).pipe(
+      retry(2),
+      // map(pizzas =>  pizzas.map(pizza =>{
+      //   return{
+      //     ...pizza,
+      //     taxes: pizza.price * 1.12
+      //   }
+      // }) )
+    );
+
+  }
+  getAllPizzas(limit ?: number ,offset ?: number  ){
     let params = new HttpParams();
     if(limit && offset == 0){
       params = params.set('limit', limit);

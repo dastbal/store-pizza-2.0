@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
 import { ExitGuard } from '../guards/exit.guard';
 import { LayoutComponent } from './components/layout/layout.component';
+import { CategoryComponent } from './pages/category/category.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PizzaDetailComponent } from './pages/pizza-detail/pizza-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -30,6 +31,13 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
         canDeactivate: [ExitGuard],
+        data: {
+          preload: false,
+        },
+      },
+      {
+        path: 'category/:categoryId',
+        component: CategoryComponent,
         data: {
           preload: false,
         },

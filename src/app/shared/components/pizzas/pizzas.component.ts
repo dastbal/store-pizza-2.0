@@ -14,16 +14,20 @@ export class PizzasComponent implements OnInit {
 
   myCart : Pizza[] = [];
   totalPrice : number = 0;
+  @Input()
   pizzas : Pizza[]= [ ];
   showDetail = false;
   limit = 6 ;
   offset = 0 ;
-  pizzaDetail :  Pizza ={
-    _id:'djdj5',
+  pizzaDetail : Pizza ={
+    id:'djdj5',
     name: 'Pizza',
     description : 'Delicous',
     image : 'https://picsum.photos/200',
     price : 10,
+    categoryId: 1,
+    ingredientsId :[1,2]
+
   };
   @Input()
   set pizzaId(id :string | null ){
@@ -69,7 +73,9 @@ export class PizzasComponent implements OnInit {
     description : 'Delicous',
     image : 'https://picsum.photos/200',
     price : 10,
-    created : '621ec3967b1ce74ad1c8700d'
+    categoryId: 1,
+    ingredientsId :[1,2]
+
 
     };
     this.pizzaService.create(newPizza)
@@ -84,12 +90,12 @@ export class PizzasComponent implements OnInit {
     const changes : updatePizzaDTO={
       name: 'Pizza',
     };
-    const id = this.pizzaDetail._id
+    const id = this.pizzaDetail.id
     this.pizzaService.update(id ,changes)
     .subscribe( (data)=>{
       console.log('updated',data);
       const pizzaIndex = this.pizzas.findIndex(
-        pizza =>pizza._id == id
+        pizza =>pizza.id == id
         );
         this.pizzas[pizzaIndex] = data;
         this.pizzaDetail = data;
@@ -97,7 +103,7 @@ export class PizzasComponent implements OnInit {
 
     }
     deletePizza(){
-      const id = this.pizzaDetail._id;
+      const id = this.pizzaDetail.id;
       this.pizzaService.delete(id)
       .subscribe( data =>{
         console.log('deleted',data);

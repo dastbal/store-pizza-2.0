@@ -1,12 +1,10 @@
 export interface User {
-  _id : string;
-  firstName:  string;
-  lastName:  string;
-  password? : string;
+  id : string;
   email : string;
   role: string;
+  customerId? : number;
 }
-export interface createUserDTO extends Omit<User, '_id'> {
+export interface createUserDTO extends Omit<User, 'id'> {
   password : string;
 
 }
