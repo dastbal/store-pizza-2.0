@@ -1,0 +1,16 @@
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+div {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-card {
+  display: flex;
+  justify-content: center;
+  width: 800px;
+}

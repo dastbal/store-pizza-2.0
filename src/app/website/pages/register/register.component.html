@@ -1,31 +1,68 @@
-<!-- <div>
-  <form class="login-form">
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="emailFormControl" />
-      <mat-error
-        *ngIf="
-          emailFormControl.hasError('email') &&
-          !emailFormControl.hasError('required')
-        "
-      >
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input type="password" matInput [formControl]="passwordFormControl" />
-      <mat-error *ngIf="!passwordFormControl.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="passwordFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </form>
+<div class="loginContainer">
+  <mat-card>
+    <form [formGroup]="form" class="login-form" (ngSubmit)="save()">
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input type="text" required matInput formControlName="firstName" />
 
-  <button mat-raised-button color="primary">Iniciar Sesion</button>
-</div> -->
+        <mat-error *ngIf="firstName?.hasError('required')">
+          Nombre es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input type="text" required matInput formControlName="lastName" />
+
+        <mat-error *ngIf="lastName?.hasError('required')">
+          Apellido es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Numero Celular</mat-label>
+        <input type="number" required matInput formControlName="phone" />
+
+        <mat-error *ngIf="phone?.hasError('required')">
+          El numero celular es <strong>requerido</strong>
+        </mat-error>
+        <mat-error *ngIf="phone?.hasError('minLength')">
+          El numero celular es <strong>invalido</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" />
+        <mat-error
+          *ngIf="email?.hasError('email') && !email?.hasError('required')"
+        >
+          Porfavor Ingresa un Correo electronico valido
+        </mat-error>
+        <mat-error *ngIf="email?.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" />
+        <mat-error *ngIf="!password?.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="password?.hasError('required')">
+          Contraseña es <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        [disabled]="form.invalid"
+        type="submit"
+        mat-raised-button
+        color="primary"
+      >
+        <!-- (click)="createNewUser()" -->
+        Iniciar Sesion
+      </button>
+    </form>
+  </mat-card>
+</div>
+<div>
+  <a mat-flat-button color="warn" routerLink="/login"> Ya tienes Usuario ? </a>
+</div>

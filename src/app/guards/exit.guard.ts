@@ -11,7 +11,7 @@ export class ExitGuard implements CanDeactivate<unknown> {
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const rta = confirm('Quires Salir ?')
+    const rta = confirm('Quieres Salir ?')
       return rta;
   }
 

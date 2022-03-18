@@ -8,5 +8,5 @@ export interface createUserDTO extends Omit<User, 'id'> {
   password : string;
 
 }
-export interface updatePizzaDTO extends Partial<createUserDTO> {
+export interface updateUserDTO extends Partial<createUserDTO> {
 }

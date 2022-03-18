@@ -7,6 +7,8 @@ import { BehaviorSubject, Subject, switchMap, tap } from 'rxjs';
 import { TokenService } from './token.service';
 import { Profile } from '../models/profile.model';
 import { Router } from '@angular/router';
+import { UsersService } from './users.service';
+import { CustomersService } from './customers.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +22,32 @@ export class AuthService {
   authStatusListener$ = this.authStatusListener.asObservable();
 
 
-  constructor(private http : HttpClient,
+  constructor(
+    private http : HttpClient,
     private tokenService :  TokenService,
+    private userService :  UsersService,
+    private customerService :  CustomersService,
     private router : Router) { }
 
+
+  register(firstName:string,lastName:string,phone:number,email:string,password:string){
+    return this.createCustomer(firstName,lastName,phone)
+    .pipe(
+      tap( (response)=> {
+        return this.createUser(email,password,response.id).subscribe(()=> console.log('sign up'))
+      })
+    );
+
+  }
+
+  createCustomer(firstName:string,lastName:string,phone:number){
+    return this.customerService.create({firstName,lastName,phone})
+
+  }
+  createUser(email:string,password:string, customerId: number){
+    return this.userService.create({email,password,role:'customer', customerId})
+
+  }
 
   login(email:string , password : string){
     return this.http.post<Auth>(`${this.apiUrl}/auth/login`,{ email, password})

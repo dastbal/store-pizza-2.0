@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,33 +8,52 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  // isLogged: boolean= false;
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  passwordFormControl = new FormControl('', [Validators.required]);
 
-  constructor(private authService : AuthService) { }
+
+  constructor(private authService : AuthService,
+    private formBuilder : FormBuilder) {
+    this.builForm();
+
+
+  }
+  private builForm(){
+    this.form = this.formBuilder.group({
+      email :  ['', [Validators.required, Validators.email]],
+      password :  ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+form: FormGroup = new FormGroup({});
 
   is_valid = false
 
   ngOnInit(): void {
   }
+  get email(){
+    return this.form.get('email')
+
+  }
+  get password(){
+    return this.form.get('firstName')
+
+  }
 
   login(){
-    this.authService.loginAndGetProfile(this.emailFormControl.value,this.passwordFormControl.value)
+    this.authService.loginAndGetProfile(this.form.get('email')?.value,this.form.get('password')?.value)
     .subscribe(
       ()=>{
-
-        // this.isLogged = true;
-
+        console.log('Log In')
       }
     )
 
 
   }
+  save(){
+    console.log(this.form.value)
+    this.login()
 
-  disabled() : boolean{
-    this.is_valid = this.emailFormControl.valid && this.passwordFormControl.valid
-    return !this.is_valid
   }
+
+
 
 }

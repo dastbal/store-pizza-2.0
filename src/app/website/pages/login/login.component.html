@@ -1,41 +1,35 @@
-<mat-card>
-  <form class="login-form">
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="emailFormControl" />
-      <mat-error
-        *ngIf="
-          emailFormControl.hasError('email') &&
-          !emailFormControl.hasError('required')
-        "
-      >
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input type="password" matInput [formControl]="passwordFormControl" />
-      <mat-error *ngIf="!passwordFormControl.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="passwordFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+<div class="registerContainer">
+  <mat-card>
+    <form class="login-form" [formGroup]="form" (ngSubmit)="save()">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" />
+        <mat-error
+          *ngIf="email?.hasError('email') && !email?.hasError('required')"
+        >
+          Porfavor Ingresa un Correo electronico valido
+        </mat-error>
+        <mat-error *ngIf="email?.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" />
+        <mat-error *ngIf="!password?.hasError('required')">
+          Porfavor Ingresa una Contraseña valida
+        </mat-error>
+        <mat-error *ngIf="password?.hasError('required')">
+          Contraseña es <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
-    <button
-      [disabled]="disabled()"
-      mat-raised-button
-      color="primary"
-      (click)="login()"
-    >
-      Iniciar Sesion
-    </button>
-    <mat-progress-spinner color="primary"></mat-progress-spinner>
-  </form>
-</mat-card>
-
-<a mat-flat-button color="warn" routerLink="/register"> Registrate </a>
+      <button [disabled]="form.invalid" mat-raised-button color="primary">
+        Registrarse
+      </button>
+    </form>
+  </mat-card>
+</div>
+<div>
+  <a mat-flat-button color="warn" routerLink="/register"> Registrate </a>
+</div>

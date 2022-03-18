@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  images : string[] = ['https://picsum.photos/900/200','https://picsum.photos/920/200','https://picsum.photos/960/200']
   pizzaId : string | null = null;
   constructor(private route : ActivatedRoute) { }
 
@@ -16,7 +15,6 @@ export class HomeComponent implements OnInit {
     this.route.queryParamMap
     .subscribe( params =>{
       this.pizzaId = params.get('pizza');
-      console.log(this.pizzaId);
     })
   }
 
