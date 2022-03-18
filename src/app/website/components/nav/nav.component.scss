@@ -20,8 +20,11 @@ a {
   text-decoration-style: none;
 }
 .cart {
+  img {
+    width: 30px;
+  }
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-right: 1rem;
   .counter {
     position: absolute;
@@ -91,6 +94,11 @@ a {
     transform: translateX(0);
   }
 }
+h2 {
+  margin-right: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
 
 /* Medium only */
 @media screen and (min-width: 40em) and (max-width: 63.9375em) {
@@ -100,10 +108,20 @@ a {
   .hide-mobile {
     display: block;
   }
+  h2 {
+    margin-right: 2rem;
+
+    font-size: 1.6rem;
+  }
 }
 
 /* Large and up */
 @media screen and (min-width: 64em) {
+  h2 {
+    margin-right: 2rem;
+
+    font-size: 1.7rem;
+  }
   .show-mobile {
     display: none;
   }
@@ -119,10 +137,4 @@ a {
     border-radius: 5px;
     color: red;
   }
-}
-
-h2 {
-  margin-right: 2rem;
-  font-weight: bold;
-  font-size: 1.7rem;
 }

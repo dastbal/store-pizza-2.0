@@ -1,5 +1,5 @@
 <div class="page-pizza">
-  <button (click)="goToBack()">Back</button>
+  <button mat-button color="primary" (click)="goToBack()">Back</button>
   <div class="detail" *ngIf="pizza">
     <img [src]="pizza.image" [alt]="pizza.name" />
     <div>

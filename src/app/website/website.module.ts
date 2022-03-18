@@ -14,6 +14,14 @@ import { PizzaDetailComponent } from './pages/pizza-detail/pizza-detail.componen
 import { LayoutComponent } from './components/layout/layout.component';
 import { SwiperModule } from 'swiper/angular';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 @NgModule({
@@ -27,13 +35,22 @@ import { SharedModule } from '../shared/shared.module';
     RecoveryComponent,
     ProfileComponent,
     PizzaDetailComponent,
-    LayoutComponent
+    LayoutComponent,
   ],
   imports: [
     CommonModule,
     WebsiteRoutingModule,
     SwiperModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCardModule,
+    MatProgressSpinnerModule
+
+    // BrowserModule,
+    // BrowserAnimationsModule
   ]
 })
 export class WebsiteModule { }

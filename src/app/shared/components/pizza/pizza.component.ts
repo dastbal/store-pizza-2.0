@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pizza } from 'src/app/models/pizza.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-pizza',
@@ -8,7 +9,9 @@ import { Pizza } from 'src/app/models/pizza.model';
 })
 export class PizzaComponent implements OnInit {
 
+  isLogged = false
 
+  constructor(private authService : AuthService){}
   @Input()
   pizza : Pizza ={
     id:'djdj5',
@@ -26,9 +29,12 @@ export class PizzaComponent implements OnInit {
   @Output()
   pizzaDetail = new EventEmitter<string>();
 
-  constructor() { }
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
+    this.authService.authStatusListener$
+    .subscribe( (res)=>{
+      this.isLogged= res
+    })
 
   }
 

@@ -6,11 +6,10 @@
     *ngFor="let pizza of pizzas"
   ></app-pizza>
 </div>
-<button (click)="loadMore()">Mas Pizzas ....</button>
+<button mat-stroked-button (click)="loadMore()">Mas Pizzas ....</button>
 <div class="pizza-detail" [class.active]="showDetail">
   <div>
-    <button (click)="togglePizzaDetail()">Close</button>
+    <button mat-button color="warn" (click)="togglePizzaDetail()">Close</button>
     <app-pizza [pizza]="pizzaDetail"></app-pizza>
   </div>
 </div>
-<button (click)="createNewPizza()">Crear</button>

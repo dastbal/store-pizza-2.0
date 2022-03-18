@@ -1,1 +1,41 @@
-<p>login works!</p>
+<mat-card>
+  <form class="login-form">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControl]="emailFormControl" />
+      <mat-error
+        *ngIf="
+          emailFormControl.hasError('email') &&
+          !emailFormControl.hasError('required')
+        "
+      >
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" matInput [formControl]="passwordFormControl" />
+      <mat-error *ngIf="!passwordFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      [disabled]="disabled()"
+      mat-raised-button
+      color="primary"
+      (click)="login()"
+    >
+      Iniciar Sesion
+    </button>
+    <mat-progress-spinner color="primary"></mat-progress-spinner>
+  </form>
+</mat-card>
+
+<a mat-flat-button color="warn" routerLink="/register"> Registrate </a>

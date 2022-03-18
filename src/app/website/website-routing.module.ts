@@ -5,6 +5,7 @@ import { ExitGuard } from '../guards/exit.guard';
 import { LayoutComponent } from './components/layout/layout.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
 import { PizzaDetailComponent } from './pages/pizza-detail/pizza-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -28,9 +29,15 @@ const routes: Routes = [
         component: PizzaDetailComponent,
       },
       {
+        path: 'login',
+        component: LoginComponent,
+        data: {
+          preload: false,
+        },
+      },
+      {
         path: 'register',
         component: RegisterComponent,
-        canDeactivate: [ExitGuard],
         data: {
           preload: false,
         },

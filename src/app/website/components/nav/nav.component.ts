@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category.models';
 import { Profile } from 'src/app/models/profile.model';
 import { User } from 'src/app/models/user.model';
@@ -18,9 +19,11 @@ export class NavComponent implements OnInit {
     private storeService : StoreService,
     private authService : AuthService,
     private categoryService : CategoriesService,
-    private router : Router) { }
+    private router : Router,
+    ) { }
 
   isLogged = false;
+
   profile : Profile | null =  {
     "sub": 1,
     "role": "admin"
@@ -44,24 +47,19 @@ export class NavComponent implements OnInit {
     this.categoryService.getAllCategories()
     .subscribe(data=> this.categories = data)
 
+    this.authService.authStatusListener$
+    .subscribe( (res)=>{
+      this.isLogged= res
+    })
+
   }
+  // ngOnDestroy(): void {
+  //   this.authListenerSubs.unsubscribe()
+  //  }
   toggleMenu() {
     this.activeMenu = !this.activeMenu;
   }
-  login(){
-    this.authService.loginAndGetProfile(
-      "davidxsteven@gmail.com",
-      "ss"
-    )
-    .subscribe(
-      ()=>{
-        // console.log(rta.access_token);
-        // this.getProfile();
-        this.isLogged = true;
 
-      }
-    )
-   }
   //  getProfile(){
   //   this.authService.profile()
   //   .subscribe(data =>{
@@ -75,7 +73,6 @@ export class NavComponent implements OnInit {
     this.authService.logout();
     this.profile = null;
     this.isLogged = false;
-    this.router.navigate(['']);
 
   }
 

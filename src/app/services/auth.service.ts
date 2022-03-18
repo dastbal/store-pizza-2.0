@@ -3,9 +3,10 @@ import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { createUserDTO, User } from '../models/user.model';
 import { Auth } from '../models/auth.model';
-import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Subject, switchMap, tap } from 'rxjs';
 import { TokenService } from './token.service';
 import { Profile } from '../models/profile.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,23 @@ import { Profile } from '../models/profile.model';
 export class AuthService {
   private apiUrl = `${environment.APi_url}`
   private profileShared =  new BehaviorSubject<Profile|null>(null) ;
+  private authStatusListener =  new BehaviorSubject<boolean>(false) ;
 
   profileShared$ = this.profileShared.asObservable();
+  authStatusListener$ = this.authStatusListener.asObservable();
 
 
   constructor(private http : HttpClient,
-    private tokenService :  TokenService) { }
+    private tokenService :  TokenService,
+    private router : Router) { }
+
+
   login(email:string , password : string){
     return this.http.post<Auth>(`${this.apiUrl}/auth/login`,{ email, password})
     .pipe(
-      tap( (response)=> this.tokenService.saveToken(response.access_token))
+      tap( (response)=> {
+        this.tokenService.saveToken(response.access_token);
+      })
     );
 
   }
@@ -31,7 +39,12 @@ export class AuthService {
     // headers.set('Authorization', `Bearer ${token}`)
     return this.http.get(`${this.apiUrl}/profile`)
     .pipe(
-      tap((profile)=> this.profileShared.next(profile as Profile) )
+      tap((profile)=> {
+        this.profileShared.next(profile as Profile);
+        this.authStatusListener.next(true);
+        this.router.navigate(['']);
+
+      } )
     )
 
   }
@@ -45,6 +58,10 @@ export class AuthService {
 
   logout(){
     this.tokenService.removeToken()
+    this.authStatusListener.next(false);
+    this.router.navigate(['']);
+
+
 
   }
 

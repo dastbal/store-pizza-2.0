@@ -54,22 +54,26 @@
     </nav>
     <div class="info">
       <div class="account">
-        <button *ngIf="!isLogged; else elseBlock" (click)="login()">
+        <button
+          mat-button
+          *ngIf="!isLogged; else elseBlock"
+          routerLink="/login"
+        >
           Iniciar Session
         </button>
         <ng-template #elseBlock>
-          <a routerLink="profile">
+          <!-- <a routerLink="profile">
             {{ profile?.role }}
-          </a>
-          <button (click)="logout()">Cerrar Session</button>
-        </ng-template>
-      </div>
-      <div>
-        <a class="cart" href="">
-          <p class="counter">{{ counter }}</p>
+          </a> -->
+          <button mat-button (click)="logout()">Cerrar Session</button>
+          <!-- <div>
+            <a #elseBlock class="cart" href="">
+              <p class="counter">{{ counter }}</p>
 
-          <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
-        </a>
+              <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
+            </a>
+          </div> -->
+        </ng-template>
       </div>
     </div>
   </div>

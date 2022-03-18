@@ -1,10 +1,41 @@
-<a [routerLink]="['/pizza', pizza.id]">
+<!-- <a [routerLink]="['/pizza', pizza.id]">
   <app-img [img]="pizza.image"></app-img>
 </a>
 <h2>{{ pizza.name | uppercase }}</h2>
 <p appHighlight>{{ pizza.description }}</p>
 <p>{{ pizza.price | currency: "$ " }}</p>
 <button (click)="onAddToCart()">Agregar</button>
-<a routerLink="." [queryParams]="{ pizza: pizza.id }">Ver Pizza</a>
+<a routerLink="." [queryParams]="{ pizza: pizza.id }">Ver Pizza</a> -->
 
+<mat-card class="pizza-card">
+  <mat-card-header>
+    <mat-card-title>{{ pizza.name | uppercase }}</mat-card-title>
+    <mat-card-subtitle> {{ pizza.price | currency: "$ " }} </mat-card-subtitle>
+  </mat-card-header>
+  <a [routerLink]="['/pizza', pizza.id]">
+    <app-img mat-card-image [img]="pizza.image"></app-img>
+  </a>
+  <mat-card-content>
+    <p>
+      {{ pizza.description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      *ngIf="isLogged"
+      color="warn"
+      mat-raised-button
+      (click)="onAddToCart()"
+    >
+      Agregar
+    </button>
+    <a
+      mat-raised-button
+      color="primary"
+      routerLink="."
+      [queryParams]="{ pizza: pizza.id }"
+      >Ver Pizza</a
+    >
+  </mat-card-actions>
+</mat-card>
 <div class="pizza-detail"></div>

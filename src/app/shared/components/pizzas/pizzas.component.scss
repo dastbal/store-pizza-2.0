@@ -2,11 +2,11 @@
   display: grid;
   justify-content: center;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   app-pizza {
     margin: 0;
   }
-  margin: 1rem 0 0 1rem;
+  margin: 0.5rem;
 }
 .pizza-detail {
   img {

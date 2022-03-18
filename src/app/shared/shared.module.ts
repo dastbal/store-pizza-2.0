@@ -6,6 +6,8 @@ import { ImgComponent } from './components/img/img.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { RouterModule } from '@angular/router';
 import { SwiperModule } from 'swiper/angular';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -19,7 +21,10 @@ import { SwiperModule } from 'swiper/angular';
   imports: [
     CommonModule,
     RouterModule,
-    SwiperModule
+    SwiperModule,
+    MatCardModule,
+    MatButtonModule
+
   ],
   exports:[
     PizzaComponent,

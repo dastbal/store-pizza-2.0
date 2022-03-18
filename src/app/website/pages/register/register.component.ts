@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ReactiveFormsModule ,FormControl, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  emailField = new FormControl('', [Validators.required,Validators.email]);
+  passwordField = new FormControl();
+
+  constructor( private authService : AuthService) { }
 
   ngOnInit(): void {
   }
+
+
 
 }
