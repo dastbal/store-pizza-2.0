@@ -41,13 +41,51 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="password" />
-        <mat-error *ngIf="!password?.hasError('required')">
-          Please enter a valid email address
+        <mat-label>Contraseña</mat-label>
+        <input
+          [type]="hide ? 'password' : 'text'"
+          type="password"
+          matInput
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="!password?.hasError('minLength')">
+          La contraseña necesita minimo 6 caracteres
+        </mat-error>
+        <mat-error *ngIf="password?.hasError('invalid_password')">
+          La contraseña necesita tener al menos un numero
         </mat-error>
         <mat-error *ngIf="password?.hasError('required')">
-          Contraseña es <strong>required</strong>
+          Contraseña es <strong>requerida</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Confirma Contraseña</mat-label>
+        <input
+          [type]="hide ? 'password' : 'text'"
+          type="password"
+          matInput
+          formControlName="confirmPassword"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="!confirmPassword?.hasError('required')">
+          Las Contraseña es requerida y debe ser igual
         </mat-error>
       </mat-form-field>
 
@@ -58,11 +96,11 @@
         color="primary"
       >
         <!-- (click)="createNewUser()" -->
-        Iniciar Sesion
+        Registrate
       </button>
     </form>
   </mat-card>
 </div>
-<div>
+<div class="right">
   <a mat-flat-button color="warn" routerLink="/login"> Ya tienes Usuario ? </a>
 </div>

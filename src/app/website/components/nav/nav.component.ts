@@ -7,20 +7,22 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { StoreService } from 'src/app/services/store.service';
-import { UsersService } from 'src/app/services/users.service';
+
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit{
 
   constructor(
     private storeService : StoreService,
     private authService : AuthService,
     private categoryService : CategoriesService,
-    private router : Router,
-    ) { }
+    ) {
+
+     }
 
   isLogged = false;
 

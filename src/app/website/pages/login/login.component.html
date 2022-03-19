@@ -15,7 +15,20 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="password" />
+        <input
+          [type]="hide ? 'password' : 'text'"
+          matInput
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
         <mat-error *ngIf="!password?.hasError('required')">
           Porfavor Ingresa una Contraseña valida
         </mat-error>
@@ -25,11 +38,11 @@
       </mat-form-field>
 
       <button [disabled]="form.invalid" mat-raised-button color="primary">
-        Registrarse
+        Login
       </button>
     </form>
   </mat-card>
 </div>
-<div>
-  <a mat-flat-button color="warn" routerLink="/register"> Registrate </a>
+<div class="right">
+  <a mat-flat-button color="warn" routerLink="/register"> Registrate</a>
 </div>

@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule ,FormControl, Validators, FormGroup ,FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Myvalidators } from 'src/utils/validators';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,9 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
   is_valid = false
+  hide = true;
+
+
 
   ngOnInit(): void {
   }
@@ -27,10 +31,13 @@ export class RegisterComponent implements OnInit {
   private builForm(){
     this.form = this.formBuilder.group({
       email :  ['', [Validators.required, Validators.email]],
-      password :  ['', [Validators.required, Validators.minLength(6)]],
+      password :  ['', [Validators.required, Validators.minLength(6), Myvalidators.validPassword]],
+      confirmPassword :  ['', [Validators.required]],
       firstName :  ['', [Validators.required]],
       lastName :  ['', [Validators.required]],
       phone :  ['', [Validators.required,Validators.minLength(10)]],
+    },{
+      Validators: Myvalidators.matchPassword
     });
   }
   get firstName(){
@@ -46,7 +53,11 @@ export class RegisterComponent implements OnInit {
 
   }
   get password(){
-    return this.form.get('firstName')
+    return this.form.get('password')
+
+  }
+  get confirmPassword(){
+    return this.form.get('confirmPassword')
 
   }
   get phone(){
@@ -55,7 +66,6 @@ export class RegisterComponent implements OnInit {
   }
 
   save(){
-    console.log(this.form.value)
     this.authService.register(
       this.firstName?.value,
       this.lastName?.value,

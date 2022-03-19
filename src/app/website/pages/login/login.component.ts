@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
 
 form: FormGroup = new FormGroup({});
 
+
+
+  hide = true;
   is_valid = false
 
   ngOnInit(): void {
@@ -34,7 +37,7 @@ form: FormGroup = new FormGroup({});
 
   }
   get password(){
-    return this.form.get('firstName')
+    return this.form.get('password')
 
   }
 

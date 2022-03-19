@@ -1,4 +1,4 @@
-<div class="show-mobile">
+<!-- <div class="show-mobile">
   <div>
     <button type="button" (click)="toggleMenu()">
       <img src="./assets/svg/icon_menu.svg" alt="menu" />
@@ -27,8 +27,85 @@
       </li>
     </ul>
   </div>
+</div> -->
+
+<div class="show-mobile">
+  <mat-toolbar class="mat-t">
+    <button
+      mat-icon-button
+      class="example-icon"
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Davids's Pizza</span>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <a routerLinkActive="active" routerLink="">Home</a>
+      </button>
+      <button mat-menu-item *ngFor="let category of categories">
+        <a
+          routerLinkActive="active"
+          [routerLink]="['/category', category.id]"
+          >{{ category.name }}</a
+        >
+      </button>
+      <button mat-menu-item>
+        <span>
+          <a *ngIf="!isLogged; else elseBlock" routerLink="/login">
+            Iniciar Session
+          </a>
+        </span>
+      </button>
+
+      <ng-template #elseBlock>
+        <button mat-menu-item>
+          <a (click)="logout()"> Cerrar Session</a>
+        </button>
+      </ng-template>
+    </mat-menu>
+  </mat-toolbar>
 </div>
+
 <div class="hide-mobile">
+  <mat-toolbar>
+    <span class="title">Davids's Pizza</span>
+    <nav>
+      <ul>
+        <li><a routerLinkActive="active" routerLink="">Home</a></li>
+        <li *ngFor="let category of categories">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/category', category.id]"
+          >
+            {{ category.name }}</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <span class="example-spacer"> </span>
+    <a mat-button *ngIf="!isLogged; else elseBlock" routerLink="/login">
+      Iniciar Session
+    </a>
+    <ng-template #elseBlock>
+      <!-- <a routerLink="profile">
+            {{ profile?.role }}
+          </a> -->
+      <button mat-button (click)="logout()">Cerrar Session</button>
+      <!-- <div>
+            <a #elseBlock class="cart" href="">
+              <p class="counter">{{ counter }}</p>
+
+              <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
+            </a>
+          </div> -->
+    </ng-template>
+  </mat-toolbar>
+</div>
+
+<!-- <div class="hide-mobile">
   <div>
     <nav>
       <a class="logo" routerLink="">
@@ -62,19 +139,18 @@
           Iniciar Session
         </button>
         <ng-template #elseBlock>
-          <!-- <a routerLink="profile">
-            {{ profile?.role }}
-          </a> -->
-          <button mat-button (click)="logout()">Cerrar Session</button>
-          <!-- <div>
-            <a #elseBlock class="cart" href="">
-              <p class="counter">{{ counter }}</p>
 
-              <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
-            </a>
-          </div> -->
+          <button mat-button (click)="logout()">Cerrar Session</button>
         </ng-template>
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<!-- <div>
+  <a #elseBlock class="cart" href="">
+    <p class="counter">{{ counter }}</p>
+
+    <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
+  </a>
+</div> -->
