@@ -59,6 +59,11 @@
           </a>
         </span>
       </button>
+      <button mat-menu-item>
+        <span>
+          <a *ngIf="!isLogged" routerLink="/register"> Registrate </a>
+        </span>
+      </button>
 
       <ng-template #elseBlock>
         <button mat-menu-item>

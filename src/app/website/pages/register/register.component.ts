@@ -1,6 +1,7 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule ,FormControl, Validators, FormGroup ,FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Myvalidators } from 'src/utils/validators';
 
@@ -14,7 +15,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService : AuthService,
-    private formBuilder : FormBuilder) {
+    private formBuilder : FormBuilder,
+    private router : Router) {
       this.builForm();
 
     }
@@ -65,18 +67,22 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  save(){
+  register(){
     this.authService.register(
       this.firstName?.value,
       this.lastName?.value,
       this.phone?.value,
       this.email?.value,
       this.password?.value,
-    )
-    .subscribe(()=>
-    console.log('sign up 1'))
-
+    ).subscribe(()=>
+    this.router.navigate(['login/']))
   }
+
+
+  save(){
+    console.log(this.form.value)
+    this.register()  }
+
 
 
 

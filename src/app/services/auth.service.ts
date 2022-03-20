@@ -66,7 +66,7 @@ export class AuthService {
       tap((profile)=> {
         this.profileShared.next(profile as Profile);
         this.authStatusListener.next(true);
-        this.router.navigate(['']);
+
 
       } )
     )
